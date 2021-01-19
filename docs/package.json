@@ -1,0 +1,26 @@
+{
+  "name": "fl-vue-docs",
+  "version": "0.0.1",
+  "description": "Documentation and demo for the fl-vue package.",
+  "author": {
+    "name": "Freddy Lundekvam",
+    "url": "https://www.fjeddy.com/"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "main": "main.js",
+  "dependencies": {
+    "fl-vue": "file:../",
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.9"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^4.5.10",
+    "sass-loader": "^10.1.1"
+  },
+  "bugs": "https://github.com/fjeddy/fl-vue/issues",
+  "homepage": "https://fl-vue.fjeddy.com/",
+  "license": "MIT"
+}

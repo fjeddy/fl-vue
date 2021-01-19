@@ -1,0 +1,58 @@
+{
+  "name": "fl-vue",
+  "description": "A collection of VueJS components interacting with a JSON API.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Freddy Lundekvam",
+    "url": "https://www.fjeddy.com/"
+  },
+  "homepage": "https://fl-vue.fjeddy.com/",
+  "bugs": {
+    "url": "https://github.com/fjeddy/fl-vue/issues"
+  },
+  "sideEffects": [
+    "*.vue"
+  ],
+  "style": "dist/fl-vue.css",
+  "sass": "src/scss/fj-vue.scss",
+  "main": "dist/fl-vue.js",
+  "module": "src/index.js",
+  "unpkg": "fl-vue.min.umd.js",
+  "jsdelivr": "fl-vue.min.umd.js",
+  "scripts": {
+    "build": "npm run build:cjs && npm run build:umd && npm run build:css",
+    "build:cjs": "bili --format cjs --moduleName fl-vue --fileName fl-vue.js",
+    "build:umd": "bili --format umd --format umd-min --moduleName fl-vue --fileName fl-vue[min].[format].js",
+    "build:css": "node-sass src/scss/export.scss dist/fj-vue.css"
+  },
+  "files": [
+    "dist/",
+    "src/scss/"
+  ],
+  "dependencies": {
+    "axios": "^0.21.1",
+    "axios-retry": "^3.1.9",
+    "bootstrap": "^5.0.0-beta1"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.5",
+    "bili": "^5.0.5",
+    "node-sass": "^5.0.0",
+    "rollup-plugin-vue": "^5.0.0",
+    "sass": "^1.32.4",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "browserslist": [
+    "node 14",
+    ">0.3%",
+    "not ie 11",
+    "not dead",
+    "not op_mini all"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fjeddy/fl-vue.git"
+  },
+  "license": "MIT"
+}
