@@ -1,8 +1,12 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['fl-vue'] = {}));
-}(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lodash/merge')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'lodash/merge'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['fl-vue'] = {}, global.merge));
+}(this, (function (exports, merge) { 'use strict';
+
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var merge__default = /*#__PURE__*/_interopDefaultLegacy(merge);
 
   const _axios = require('axios');
 
@@ -208,7 +212,28 @@
       FlDropdown
     },
     render: function (createElement) {
-      return this.ce(createElement, 'nav', 'fl-navbar navbar navbar-expand-lg', [this.createContainer(createElement)]);
+      return this.ce(createElement, 'nav', this.getClasses, [this.createContainer(createElement)]);
+    },
+    computed: {
+      getClasses() {
+        const classes = {
+          'fl-footer': true,
+          'fl-navbar': true,
+          'navbar': true,
+          'navbar-expand-lg': true
+        };
+
+        if (this.$fj.options.navbar.class) {
+          const c = this.$fj.options.navbar.class.split(' ');
+
+          for (const cc of c) {
+            classes[cc] = true;
+          }
+        }
+
+        return classes;
+      }
+
     },
     methods: {
       ce(c, string, classNames, array) {
@@ -362,6 +387,14 @@
           }
         }
 
+        if (this.$fj.options.header.class) {
+          const c = this.$fj.options.header.class.split(' ');
+
+          for (const cc of c) {
+            classes[cc] = true;
+          }
+        }
+
         return classes;
       },
 
@@ -373,6 +406,14 @@
 
         if (this.$route.meta && this.$route.meta.sidebar && this.$route.meta.sidebar.class) {
           const c = this.$route.meta.sidebar.class.split(' ');
+
+          for (const cc of c) {
+            classes[cc] = true;
+          }
+        }
+
+        if (this.$fj.options.sidebar.class) {
+          const c = this.$fj.options.sidebar.class.split(' ');
 
           for (const cc of c) {
             classes[cc] = true;
@@ -397,12 +438,21 @@
           }
         }
 
+        if (this.$fj.options.content.class) {
+          const c = this.$fj.options.content.class.split(' ');
+
+          for (const cc of c) {
+            classes[cc] = true;
+          }
+        }
+
         return classes;
       }
 
     },
     methods: {
       createHeader(createElement) {
+        if (!this.hasHeader) return;
         return createElement('div', {
           class: this.getHeaderClasses
         }, [createElement('router-view', {
@@ -436,10 +486,26 @@
     name: 'FlFooter',
     render: function (createElement) {
       return createElement('div', {
-        class: {
-          'fl-footer': true
-        }
+        class: this.getClasses
       }, this.$slots.default);
+    },
+    computed: {
+      getClasses() {
+        const classes = {
+          'fl-footer': true
+        };
+
+        if (this.$fj.options.footer.class) {
+          const c = this.$fj.options.footer.class.split(' ');
+
+          for (const cc of c) {
+            classes[cc] = true;
+          }
+        }
+
+        return classes;
+      }
+
     }
   };
 
@@ -465,6 +531,43 @@
     }
   };
 
+  var index = {
+    install(Vue, app_options) {
+      // Set options
+      const def_options = {
+        options: {
+          navbar: {},
+          header: {
+            class: 'py-5'
+          },
+          sidebar: {
+            class: 'py-5',
+            follow: true
+          },
+          content: {
+            class: 'py-5'
+          },
+          footer: {
+            class: 'py-5'
+          }
+        },
+        language: {
+          apiError: "Got an error while loading data from the API :(",
+          apiFailed: "We've failed in any attempt made to process this list... We suck :(",
+          listViewing: "Viewing %limit of %total items",
+          pagination: {
+            previous: "Previous",
+            next: "Next"
+          }
+        }
+      };
+      const options = merge__default['default'](def_options, app_options);
+      Vue.prototype.$fj = options;
+      Vue.prototype.$axios = axios_1;
+    }
+
+  };
+
   exports.FlAxios = axios_1;
   exports.FlCode = FlCode;
   exports.FlContent = FlContent;
@@ -474,6 +577,7 @@
   exports.FlLink = FlLink;
   exports.FlNavbar = FlNavbar;
   exports.FlSidebar = FlSidebar;
+  exports.default = index;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

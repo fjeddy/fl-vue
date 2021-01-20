@@ -17,9 +17,29 @@ export default {
     return this.ce(
       createElement,
       'nav',
-      'fl-navbar navbar navbar-expand-lg',
+      this.getClasses,
       [ this.createContainer(createElement) ]
     )
+  },
+
+  computed: {
+    getClasses() {
+      const classes = {
+        'fl-footer': true,
+        'fl-navbar': true,
+        'navbar': true,
+        'navbar-expand-lg': true
+      }
+
+      if (this.$fj.options.navbar.class) {
+        const c = this.$fj.options.navbar.class.split(' ')
+        for (const cc of c) {
+          classes[cc] = true
+        }
+      }
+
+      return classes
+    }
   },
 
   methods: {

@@ -7,16 +7,7 @@ module.exports = [
       header: () => import(/* webpackChunkName: "header-example" */ '@/views/headers/Example.vue')
     },
     meta: {
-      title: "Example with header",
-      header: {
-        class: 'py-5'
-      },
-      content: {
-        class: 'py-5'
-      },
-      sidebar: {
-        class: 'py-5'
-      }
+      title: "Example with header"
     }
   },
 

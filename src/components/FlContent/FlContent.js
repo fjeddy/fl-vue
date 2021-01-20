@@ -72,6 +72,13 @@ export default {
         }
       }
 
+      if (this.$fj.options.header.class) {
+        const c = this.$fj.options.header.class.split(' ')
+        for (const cc of c) {
+          classes[cc] = true
+        }
+      }
+
       return classes
     },
 
@@ -83,6 +90,13 @@ export default {
 
       if (this.$route.meta && this.$route.meta.sidebar && this.$route.meta.sidebar.class) {
         const c = this.$route.meta.sidebar.class.split(' ')
+        for (const cc of c) {
+          classes[cc] = true
+        }
+      }
+
+      if (this.$fj.options.sidebar.class) {
+        const c = this.$fj.options.sidebar.class.split(' ')
         for (const cc of c) {
           classes[cc] = true
         }
@@ -105,12 +119,20 @@ export default {
         }
       }
 
+      if (this.$fj.options.content.class) {
+        const c = this.$fj.options.content.class.split(' ')
+        for (const cc of c) {
+          classes[cc] = true
+        }
+      }
+
       return classes
     }
   },
 
   methods: {
     createHeader(createElement) {
+      if (!this.hasHeader) return
       return createElement(
         'div',
         {
@@ -122,7 +144,6 @@ export default {
 
     createSidebar(createElement) {
       if (!this.hasSidebar) return
-      
       return createElement(
         'div',
         {

@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column h-100">
 
-    <fl-navbar class="navbar-light bg-light" :menu="navigation">
+    <fl-navbar :menu="navigation">
       <fl-link class="navbar-brand" to="/">
         fl-vue
       </fl-link>
@@ -9,7 +9,7 @@
 
     <fl-content class="flex-fill" />
 
-    <fl-footer class="py-5 bg-warning">
+    <fl-footer class="bg-warning">
       <div class="container">
         This is a footer
       </div>
@@ -41,7 +41,7 @@ export default {
               className: 'test'
             },
             {
-              title: 'Examples',
+              title: 'Example layouts',
               dropdown: [
                 {
                   title: 'With a header',

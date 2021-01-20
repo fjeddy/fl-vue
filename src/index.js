@@ -1,3 +1,5 @@
+import merge from 'lodash/merge'
+
 import FlAxios from './axios'
 
 import FlNavbar from './components/FlNavbar'
@@ -9,6 +11,45 @@ import FlFooter from './components/FlFooter'
 import FlDropdown from './components/FlDropdown'
 import FlLink from './components/FlLink'
 import FlCode from './components/FlCode'
+
+export default {
+  install(Vue, app_options) {
+
+    // Set options
+    const def_options = {
+      options: {
+        navbar: {},
+        header: {
+          class: 'py-5'
+        },
+        sidebar: {
+          class: 'py-5',
+          follow: true
+        },
+        content: {
+          class: 'py-5'
+        },
+        footer: {
+          class: 'py-5'
+        }
+      },
+      language: {
+        apiError: "Got an error while loading data from the API :(",
+        apiFailed: "We've failed in any attempt made to process this list... We suck :(",
+        listViewing: "Viewing %limit of %total items",
+        pagination: {
+          previous: "Previous",
+          next: "Next"
+        }
+      }
+    }
+    const options = merge(def_options, app_options)
+
+    Vue.prototype.$fj = options
+    Vue.prototype.$axios = FlAxios
+
+  }
+}
 
 export {
   FlAxios,
