@@ -112,28 +112,28 @@ export default {
 
     createDropdownLink(createElement, link) {
       let self = this
+      let element = createElement(
+        'fl-link',
+        {
+          class: {
+            'dropdown-item': true
+          },
+          props: {
+            to: link.to,
+            title: link.title
+          },
+          nativeOn: {
+            click: function(event) {
+              self.show = !self.show
+            }
+          }
+        }
+      )
+
       return createElement(
         'li',
         {},
-        [
-          createElement(
-            'fl-link',
-            {
-              class: {
-                'dropdown-item': true
-              },
-              props: {
-                to: link.to,
-                title: link.title
-              },
-              nativeOn: {
-                click: function(event) {
-                  self.show = !self.show
-                }
-              }
-            }
-          )
-        ]
+        [ element ]
       )
     }
   }
