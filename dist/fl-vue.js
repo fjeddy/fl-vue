@@ -3,10 +3,13 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var merge = require('lodash/merge');
+var Prism = require('prism-es6');
+require('prism-es6/themes/prism-tomorrow.css');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 var merge__default = /*#__PURE__*/_interopDefaultLegacy(merge);
+var Prism__default = /*#__PURE__*/_interopDefaultLegacy(Prism);
 
 const _axios = require('axios');
 
@@ -316,28 +319,6 @@ var FlNavbar = {
   }
 };
 
-var FlHeader = {
-  name: 'FlHeader',
-  render: function (createElement) {
-    return createElement('div', {
-      class: {
-        'fl-header': true
-      }
-    }, this.$slots.default);
-  }
-};
-
-var FlSidebar = {
-  name: 'FlSidebar',
-  render: function (createElement) {
-    return createElement('div', {
-      class: {
-        'fl-sidebar': true
-      }
-    }, this.$slots.default);
-  }
-};
-
 var FlContent = {
   name: 'FlContent',
   data: function () {
@@ -511,23 +492,35 @@ var FlFooter = {
 
 var FlCode = {
   name: 'FlCode',
+  functional: true,
   props: {
-    source: {
-      type: String,
-      required: true
+    code: {
+      type: String
     },
     language: {
       type: String,
       default: 'javascript'
     }
   },
-  render: function (createElement) {
-    const pre = createElement('pre', [this.source]);
-    return createElement('code', {
+  render: function (h, ctx) {
+    const code = ctx.props.code || (ctx.children && ctx.children.length > 0 ? ctx.children[0].text : '');
+    const pre = h('code', {
+      domProps: {
+        innerHTML: Prism__default['default'].highlight(code, Prism__default['default'].languages.javascript, 'javascript')
+      }
+    });
+    return h('pre', {
       class: {
-        'fl-content': true
+        'fl-content': true,
+        'language-javascript': true
       }
     }, [pre]);
+  },
+  computed: {
+    getContent() {
+      return this.source;
+    }
+
   }
 };
 
@@ -538,17 +531,17 @@ var index = {
       options: {
         navbar: {},
         header: {
-          class: 'py-5'
+          class: null
         },
         sidebar: {
-          class: 'py-5',
+          class: null,
           follow: true
         },
         content: {
-          class: 'py-5'
+          class: null
         },
         footer: {
-          class: 'py-5'
+          class: null
         }
       },
       language: {
@@ -563,7 +556,6 @@ var index = {
     };
     const options = merge__default['default'](def_options, app_options);
     Vue.prototype.$fj = options;
-    Vue.prototype.$axios = axios_1;
   }
 
 };
@@ -573,8 +565,6 @@ exports.FlCode = FlCode;
 exports.FlContent = FlContent;
 exports.FlDropdown = FlDropdown;
 exports.FlFooter = FlFooter;
-exports.FlHeader = FlHeader;
 exports.FlLink = FlLink;
 exports.FlNavbar = FlNavbar;
-exports.FlSidebar = FlSidebar;
 exports.default = index;

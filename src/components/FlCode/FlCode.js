@@ -1,33 +1,47 @@
+import Prism from 'prism-es6'
+import 'prism-es6/themes/prism-tomorrow.css'
+
 export default {
   name: 'FlCode',
-
+  functional: true,
   props: {
-    source: {
-      type: String,
-      required: true
+    code: {
+      type: String
     },
-
     language: {
       type: String,
-      default: 'javascript'
+      default: 'markup'
     }
   },
+  render: function(h, ctx) {
+    const code =
+      ctx.props.code ||
+      (ctx.children && ctx.children.length > 0 ? ctx.children[0].text : '')
+    const language = ctx.props.language
+    const prismLanguage = Prism.languages[language]
+    const className = `language-${language}`
 
-  render: function(createElement) {
-    const pre = createElement('pre', [
-      this.source
-    ])
-
-    return createElement(
-      'code',
+    return h(
+      'pre',
       {
         class: {
-          'fl-content': true
+          'fl-content': true,
+          'language-javascript': true
         }
       },
       [
-        pre
+        h('code', {
+          class: className,
+          domProps: {
+            innerHTML: Prism.highlight(code, prismLanguage)
+          }
+        })
       ]
     )
+  },
+  computed: {
+    getContent() {
+      return this.source
+    }
   }
 }

@@ -8,7 +8,7 @@
       <h2>Getting the framework</h2>
       <p>Include the framework in your build using NPM.</p>
 
-      <f-code>npm install fl-vue -S</f-code>
+      <fl-code code="npm install fl-vue -S" language="js" />
     </section>
 
     <section>
@@ -19,6 +19,10 @@
 
       <p>Nothing is actually imported or included, you're simply setting a global
       variable with a few settings the framework will use later.</p>
+
+      <fl-code language="js">{`
+        Hello
+      `}</fl-code>
     </section>
 
     <section>
