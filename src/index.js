@@ -20,17 +20,17 @@ export default {
       options: {
         navbar: {},
         header: {
-          class: 'py-5'
+          class: null
         },
         sidebar: {
-          class: 'py-5',
+          class: null,
           follow: true
         },
         content: {
-          class: 'py-5'
+          class: null
         },
         footer: {
-          class: 'py-5'
+          class: null
         }
       },
       language: {
@@ -46,7 +46,6 @@ export default {
     const options = merge(def_options, app_options)
 
     Vue.prototype.$fj = options
-    Vue.prototype.$axios = FlAxios
 
   }
 }

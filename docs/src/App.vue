@@ -9,7 +9,7 @@
 
     <fl-content class="flex-fill" />
 
-    <fl-footer class="bg-warning">
+    <fl-footer>
       <div class="container">
         This is a footer
       </div>

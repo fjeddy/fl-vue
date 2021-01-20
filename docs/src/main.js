@@ -9,6 +9,9 @@ Vue.use(FlVue, {
   options: {
     navbar: {
       class: 'navbar-light bg-light'
+    },
+    footer: {
+      class: 'bg-light py-5'
     }
   }
 })
