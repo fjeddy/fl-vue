@@ -1,9 +1,11 @@
 @import "~bootstrap/scss/_root";
 @import "~bootstrap/scss/_reboot";
+@import "~bootstrap/scss/_type";
 @import "~bootstrap/scss/_containers";
+@import "~bootstrap/scss/_grid";
 @import "~bootstrap/scss/_dropdown";
 @import "~bootstrap/scss/_nav";
 @import "~bootstrap/scss/_navbar";
-@import "~bootstrap/scss/_grid";
 
+@import "~bootstrap/scss/_helpers.scss";
 @import "~bootstrap/scss/utilities/_api";

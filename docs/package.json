@@ -12,6 +12,7 @@
   },
   "main": "main.js",
   "dependencies": {
+    "bootstrap": "^5.0.0-beta1",
     "fl-vue": "file:../",
     "vue": "^2.6.12",
     "vue-router": "^3.4.9"

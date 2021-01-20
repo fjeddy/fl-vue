@@ -1,5 +1,3 @@
-import FlHeader from '../FlHeader'
-
 export default {
   name: 'FlContent',
 

@@ -3,8 +3,6 @@ import merge from 'lodash/merge'
 import FlAxios from './axios'
 
 import FlNavbar from './components/FlNavbar'
-import FlHeader from './components/FlHeader'
-import FlSidebar from './components/FlSidebar'
 import FlContent from './components/FlContent'
 import FlFooter from './components/FlFooter'
 
@@ -54,8 +52,6 @@ export {
   FlAxios,
 
   FlNavbar,
-  FlHeader,
-  FlSidebar,
   FlContent,
   FlFooter,
 

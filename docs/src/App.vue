@@ -21,10 +21,8 @@
 <script>
 import {
   FlNavbar,
-  FlHeader,
   FlContent,
-  FlFooter,
-  FlLink
+  FlFooter
 } from 'fl-vue'
 
 export default {
@@ -36,7 +34,7 @@ export default {
           visible: true,
           items: [
             {
-              title: 'Home',
+              title: 'Documentation',
               to: '/',
               className: 'test'
             },
@@ -88,10 +86,8 @@ export default {
 
   components: {
     FlNavbar,
-    FlHeader,
     FlContent,
-    FlFooter,
-    FlLink
+    FlFooter
   }
 }
 </script>
