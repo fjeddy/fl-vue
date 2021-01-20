@@ -9,13 +9,13 @@ module.exports = [
     meta: {
       title: "Example with header",
       header: {
-        class: 'py-5 bg-danger'
+        class: 'py-5'
       },
       content: {
-        class: 'py-5 bg-success'
+        class: 'py-5'
       },
       sidebar: {
-        class: 'py-5 bg-dark'
+        class: 'py-5'
       }
     }
   },
