@@ -1,5 +1,5 @@
 <template>
   <div>
-    404 - Page not found
+    Content centered
   </div>
 </template>

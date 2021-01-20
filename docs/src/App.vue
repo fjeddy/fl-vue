@@ -7,17 +7,7 @@
       </fl-link>
     </fl-navbar>
 
-    <fl-header class="py-5 bg-danger">
-      <div class="container">
-        This is a header
-      </div>
-    </fl-header>
-
-    <fl-content class="flex-fill py-5 bg-success">
-      <div class="container">
-        This is the content
-      </div>
-    </fl-content>
+    <fl-content class="flex-fill" />
 
     <fl-footer class="py-5 bg-warning">
       <div class="container">
@@ -54,8 +44,16 @@ export default {
               title: 'Examples',
               dropdown: [
                 {
-                  title: 'Header',
+                  title: 'With a header',
                   to: '/examples/header'
+                },
+                {
+                  title: 'With a sidebar',
+                  to: '/examples/sidebar'
+                },
+                {
+                  title: 'With a header and sidebar',
+                  to: '/examples/header-sidebar'
                 }
               ]
             }

@@ -4,9 +4,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import core from '@/router/core'
+import examples from '@/router/examples'
 
 const routes = [
   ...core,
+  ...examples,
 
   {
     path: '*',
