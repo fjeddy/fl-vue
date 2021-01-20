@@ -21,21 +21,6 @@ axiosRetry(axios, {
 });
 var axios_1 = axios;
 
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
 var FlLink = {
   name: 'FlLink',
   props: {
@@ -106,170 +91,188 @@ var FlLink = {
   }
 };
 
-var FlNavbar = {
-  name: 'FlNavbar',
+var FlDropdown = {
+  name: 'FlDropdown',
+  data: function () {
+    return {
+      show: false
+    };
+  },
   props: {
-    menu: {
-      type: Array
-    }
+    container: {
+      type: String,
+      default: 'div'
+    },
+    type: {
+      type: String,
+      default: 'link'
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    items: {
+      type: Array,
+      required: true
+    },
+    className: String,
+    handlerClassName: String
   },
   components: {
     FlLink
   },
   render: function (createElement) {
-    return createElement('nav', {
+    const elements = [];
+    if (this.type === 'button') elements.push(this.createButton(createElement));else elements.push(this.createLink(createElement));
+    elements.push(this.createDropdown(createElement));
+    return createElement(this.container, {
       class: {
-        'fl-navbar': true,
-        'navbar': true,
-        'navbar-expand-lg': true
+        'fl-dropdown': true,
+        'dropdown': true,
+        [this.className]: this.className ? true : false
       }
-    }, [this.navContainer(createElement)]);
+    }, elements);
   },
   methods: {
-    navContainer(createElement) {
-      return createElement('div', {
+    createLink(createElement) {
+      let self = this;
+      return createElement('a', {
         class: {
-          'container': true
+          [this.handlerClassName]: this.handlerClassName ? true : false,
+          'show': this.show
+        },
+        on: {
+          click: function () {
+            self.show = !self.show;
+          }
         }
-      }, [this.$slots.default, this.createMenus(createElement)]);
+      }, [this.title]);
     },
 
-    createMenus(createElement) {
-      const result = [];
+    createButton(createElement) {},
+
+    createDropdown(createElement) {
+      const elements = [];
+
+      if (this.items) {
+        for (const item of this.items) {
+          const element = this.createDropdownLink(createElement, item);
+          if (element) elements.push(element);
+        }
+      }
+
+      return createElement('ul', {
+        class: {
+          'dropdown-menu': true,
+          'show': this.show
+        }
+      }, elements);
+    },
+
+    createDropdownLink(createElement, link) {
+      return createElement('li', {}, [createElement('fl-link', {
+        class: {
+          'dropdown-item': true
+        },
+        props: {
+          to: link.to,
+          title: link.title
+        }
+      })]);
+    }
+
+  }
+};
+
+var FlNavbar = {
+  name: 'FlNavbar',
+  props: {
+    menu: {}
+  },
+  components: {
+    FlLink,
+    FlDropdown
+  },
+  render: function (createElement) {
+    return this.ce(createElement, 'nav', 'fl-navbar navbar navbar-expand-lg', [this.createContainer(createElement)]);
+  },
+  methods: {
+    ce(c, string, classNames, array) {
+      return c(string, {
+        class: classNames
+      }, array);
+    },
+
+    createContainer(createElement) {
+      const elements = [];
 
       if (this.menu) {
-        for (const link of this.menu) {
-          if (typeof link != 'object') throw new Error('Menu option is not an object or an array');
+        let menu = [];
+        if (!Array.isArray(this.menu)) menu.push(this.menu);else menu = this.menu;
 
-          if (Array.isArray(link)) ; else {
-            link.links;
-
-            var options = _objectWithoutPropertiesLoose(link, ["links"]);
-          }
-
-          if (options.visible && options.visible === false) continue;
-          if (!link.links) result.push(this.createDropdown(createElement, link));
+        for (const nav of menu) {
+          let element;
+          if (Array.isArray(nav)) element = this.createNavbarNav(createElement, {
+            items: nav
+          });else element = this.createNavbarNav(createElement, nav);
+          if (element) elements.push(element);
         }
       }
 
-      return result;
+      return this.ce(createElement, 'div', 'container', [this.$slots.default, ...elements]);
     },
 
-    createDropdown(createElement, link) {}
-    /**
-    createNavigation(createElement) {
-      return createElement(
-        'div',
-        {
-          class: {
-            'container': true
-          }
-        },
-        [
-          this.$slots.default,
-          ...this.createMenu(createElement)
-        ]
-      )
-    },
-     createMenu(createElement) {
-      const result = []
-       if (this.menu) {
-        for (const group of this.menu) {
-          if (group.visible === false) continue
-          result.push(this.createMenuGroup(createElement, group))
-        }
-      }
-       return result
-    },
-     createMenuGroup(createElement, group) {
-      return createElement(
-        'ul',
-        {
-          class: {
-            'navbar-nav': true,
-            [group.class]: true
-          }
-        },
-        this.createMenuItems(createElement, group)
-      )
-    },
-     createMenuItems(createElement, group) {
-      const result = []
-       for (const link of group.links) {
-        if (link.visible === false) continue
-        result.push(this.createMenuItem(createElement, link))
-      }
-       return result
-    },
-     createMenuItem(createElement, link) {
-      return createElement(
-        'li',
-        {
-          class: {
-            'nav-item': true,
-            'dropdown': (link.links) ? true : false
-          }
-        },
-        [
-          this.createMenuLink(createElement, link),
-          this.createMenuDropdown(createElement, link)
-        ]
-      )
-    },
-     createMenuLink(createElement, link) {
-      return createElement(
-        'fl-link',
-        {
-          class: {
-            'nav-link': true,
-            'dropdown-toggle': (link.links) ? true : false,
-            [link.class]: (link.class) ? true : false
-          },
-          props: {
-            to: (link.to) ? link.to : '',
-            title: (link.title) ? link.title : null
+    createNavbarNav(createElement, nav) {
+      if (nav.visible === false) return;
+      const elements = [];
+
+      if (nav.items) {
+        for (const item of nav.items) {
+          if (item.dropdown) {
+            if (!Array.isArray(item.dropdown)) throw new Error('Dropdown list is not an array.');
+            const element = this.createNavDropdown(createElement, item);
+            if (element) elements.push(element);
+          } else {
+            const element = this.createNavItem(createElement, item);
+            if (element) elements.push(element);
           }
         }
-      )
-    },
-     createMenuDropdown(createElement, link) {
-      if (!link.links) return null
-      return createElement(
-        'ul',
-        {
-          class: {
-            'dropdown-menu': true
-          }
-        },
-        this.createMenuDropdownLinks(createElement, link)
-      )
-    },
-     createMenuDropdownLinks(createElement, link) {
-      const result = []
-       for (const l of link.links) {
-        if (l.visible === false) continue
-         const lElement = createElement(
-          'fl-link',
-          {
-            class: {
-              'dropdown-item': true,
-              [link.class]: (link.class) ? true : false
-            },
-            props: {
-              to: (link.to) ? link.to : '',
-              title: (link.title) ? link.title : null
-            }
-          }
-        )
-         result.push(createElement(
-          'li',
-          [lElement]
-        ))
       }
-       return result
+
+      return createElement('ul', {
+        class: {
+          'navbar-nav': true,
+          [nav.className]: nav.className ? true : false
+        }
+      }, elements);
+    },
+
+    createNavItem(createElement, item) {
+      if (item.visible === false) return;
+      return this.ce(createElement, 'li', 'nav-item', [this.createNavLink(createElement, item)]);
+    },
+
+    createNavLink(createElement, item) {
+      return createElement('fl-link', {
+        class: 'nav-link',
+        props: {
+          to: item.to
+        }
+      }, [item.title]);
+    },
+
+    createNavDropdown(createElement, item) {
+      if (item.visible === false) return;
+      return createElement('fl-dropdown', {
+        props: {
+          items: item.dropdown,
+          title: item.title,
+          className: 'nav-item',
+          handlerClassName: 'nav-link dropdown-toggle',
+          container: 'li'
+        }
+      });
     }
-    **/
-
 
   }
 };
@@ -343,6 +346,7 @@ var FlCode = {
 exports.FlAxios = axios_1;
 exports.FlCode = FlCode;
 exports.FlContent = FlContent;
+exports.FlDropdown = FlDropdown;
 exports.FlFooter = FlFooter;
 exports.FlHeader = FlHeader;
 exports.FlLink = FlLink;

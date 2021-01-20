@@ -1,204 +1,137 @@
 import FlLink from '../FlLink'
+import FlDropdown from '../FlDropdown'
 
 export default {
   name: 'FlNavbar',
 
   props: {
-    menu: {
-      type: Array
-    }
+    menu: {}
   },
 
   components: {
-    FlLink
+    FlLink,
+    FlDropdown
   },
 
   render: function(createElement) {
-    return createElement(
+    return this.ce(
+      createElement,
       'nav',
-      {
-        class: {
-          'fl-navbar': true,
-          'navbar': true,
-          'navbar-expand-lg': true
-        }
-      },
-      [
-        this.navContainer(createElement)
-      ]
+      'fl-navbar navbar navbar-expand-lg',
+      [ this.createContainer(createElement) ]
     )
   },
 
   methods: {
-    navContainer(createElement) {
-      return createElement(
-        'div',
+    ce(c, string, classNames, array) {
+      return c(
+        string,
         {
-          class: {
-            'container': true
-          }
+          class: classNames
         },
+        array
+      )
+    },
+
+    createContainer(createElement) {
+      const elements = []
+
+      if (this.menu) {
+        let menu = []
+
+        if (!Array.isArray(this.menu)) menu.push(this.menu)
+        else menu = this.menu
+
+        for (const nav of menu) {
+          let element
+          if (Array.isArray(nav)) element = this.createNavbarNav(createElement, { items: nav })
+          else element = this.createNavbarNav(createElement, nav)
+          if (element) elements.push(element)
+        }
+      }
+
+      return this.ce(
+        createElement,
+        'div',
+        'container',
         [
           this.$slots.default,
-          this.createMenus(createElement)
+          ...elements
         ]
       )
     },
 
-    createMenus(createElement) {
-      const result = []
+    createNavbarNav(createElement, nav) {
+      if (nav.visible === false) return
 
-      if (this.menu) {
-        for (const link of this.menu) {
-          if (typeof link != 'object') throw new Error('Menu option is not an object or an array')
+      const elements = []
 
-          let linkss = []
+      if (nav.items) {
+        for (const item of nav.items) {
 
-          if (Array.isArray(link)) {
-            linkss = link
+          if (item.dropdown) {
+            if (!Array.isArray(item.dropdown)) throw new Error('Dropdown list is not an array.')
+            const element = this.createNavDropdown(createElement, item)
+            if (element) elements.push(element)
           } else {
-            linkss = link.links
-            var { links, ...options } = link
+            const element = this.createNavItem(createElement, item)
+            if (element) elements.push(element)
           }
-          
-          if (options.visible && options.visible === false) continue
-          if (!link.links) result.push(this.createDropdown(createElement, link))
+
         }
       }
 
-      return result
-    },
-
-    createDropdown(createElement, link) {
-    }
-
-    /**
-    createNavigation(createElement) {
-      return createElement(
-        'div',
-        {
-          class: {
-            'container': true
-          }
-        },
-        [
-          this.$slots.default,
-          ...this.createMenu(createElement)
-        ]
-      )
-    },
-
-    createMenu(createElement) {
-      const result = []
-
-      if (this.menu) {
-        for (const group of this.menu) {
-          if (group.visible === false) continue
-          result.push(this.createMenuGroup(createElement, group))
-        }
-      }
-
-      return result
-    },
-
-    createMenuGroup(createElement, group) {
       return createElement(
         'ul',
         {
           class: {
             'navbar-nav': true,
-            [group.class]: true
+            [nav.className]: (nav.className) ? true : false
           }
         },
-        this.createMenuItems(createElement, group)
+        elements
       )
     },
 
-    createMenuItems(createElement, group) {
-      const result = []
+    createNavItem(createElement, item) {
+      if (item.visible === false) return
 
-      for (const link of group.links) {
-        if (link.visible === false) continue
-        result.push(this.createMenuItem(createElement, link))
-      }
-
-      return result
-    },
-
-    createMenuItem(createElement, link) {
-      return createElement(
+      return this.ce(
+        createElement,
         'li',
-        {
-          class: {
-            'nav-item': true,
-            'dropdown': (link.links) ? true : false
-          }
-        },
-        [
-          this.createMenuLink(createElement, link),
-          this.createMenuDropdown(createElement, link)
-        ]
+        'nav-item',
+        [ this.createNavLink(createElement, item) ]
       )
     },
 
-    createMenuLink(createElement, link) {
+    createNavLink(createElement, item) {
       return createElement(
         'fl-link',
         {
-          class: {
-            'nav-link': true,
-            'dropdown-toggle': (link.links) ? true : false,
-            [link.class]: (link.class) ? true : false
-          },
+          class: 'nav-link',
           props: {
-            to: (link.to) ? link.to : '',
-            title: (link.title) ? link.title : null
+            to: item.to
+          }
+        },
+        [ item.title ]
+      )
+    },
+
+    createNavDropdown(createElement, item) {
+      if (item.visible === false) return
+
+      return createElement(
+        'fl-dropdown',
+        {
+          props: {
+            items: item.dropdown,
+            title: item.title,
+            className: 'nav-item',
+            handlerClassName: 'nav-link dropdown-toggle',
+            container: 'li'
           }
         }
       )
-    },
-
-    createMenuDropdown(createElement, link) {
-      if (!link.links) return null
-      return createElement(
-        'ul',
-        {
-          class: {
-            'dropdown-menu': true
-          }
-        },
-        this.createMenuDropdownLinks(createElement, link)
-      )
-    },
-
-    createMenuDropdownLinks(createElement, link) {
-      const result = []
-
-      for (const l of link.links) {
-        if (l.visible === false) continue
-
-        const lElement = createElement(
-          'fl-link',
-          {
-            class: {
-              'dropdown-item': true,
-              [link.class]: (link.class) ? true : false
-            },
-            props: {
-              to: (link.to) ? link.to : '',
-              title: (link.title) ? link.title : null
-            }
-          }
-        )
-
-        result.push(createElement(
-          'li',
-          [lElement]
-        ))
-      }
-
-      return result
     }
-    **/
   }
 }

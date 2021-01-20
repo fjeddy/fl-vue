@@ -6,6 +6,7 @@ import FlSidebar from './components/FlSidebar'
 import FlContent from './components/FlContent'
 import FlFooter from './components/FlFooter'
 
+import FlDropdown from './components/FlDropdown'
 import FlLink from './components/FlLink'
 import FlCode from './components/FlCode'
 
@@ -18,6 +19,7 @@ export {
   FlContent,
   FlFooter,
 
+  FlDropdown,
   FlLink,
   FlCode
 }

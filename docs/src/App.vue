@@ -42,16 +42,17 @@ export default {
     return {
       navigation: [
         {
-          class: 'me-auto',
-          links: [
+          className: 'me-auto',
+          visible: true,
+          items: [
             {
               title: 'Home',
               to: '/',
-              class: 'test'
+              className: 'test'
             },
             {
               title: 'Examples',
-              links: [
+              dropdown: [
                 {
                   title: 'Header',
                   to: '/examples/header'
@@ -62,14 +63,14 @@ export default {
         },
         {
           visible: true,
-          links: [
+          items: [
             {
-              title: 'Register',
-              to: '/register'
+              title: 'Test',
+              to: '/test'
             },
             {
-              title: 'Login',
-              to: '/login'
+              title: 'Hmmm',
+              to: '/hmmmmm'
             }
           ]
         },
