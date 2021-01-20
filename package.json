@@ -23,7 +23,7 @@
     "build": "npm run build:cjs && npm run build:umd && npm run build:css",
     "build:cjs": "bili --format cjs --moduleName fl-vue --fileName fl-vue.js",
     "build:umd": "bili --format umd --format umd-min --moduleName fl-vue --fileName fl-vue[min].[format].js",
-    "build:css": "node-sass src/scss/export.scss dist/fj-vue.css"
+    "build:css": "node-sass --importer=node_modules/node-sass-tilde-importer src/scss/export.scss dist/fj-vue.css"
   },
   "files": [
     "dist/",
@@ -41,7 +41,8 @@
     "rollup-plugin-vue": "^5.0.0",
     "sass": "^1.32.4",
     "vue": "^2.6.12",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "node-sass-tilde-importer": "^1.0.2"
   },
   "browserslist": [
     "node 14",
