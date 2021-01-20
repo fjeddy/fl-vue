@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1>fj-vue</h1>
+    <h1>fl-vue</h1>
     <p class="lead">A simple collection of VueJS components and mixins that
     interacts and generate content based on a JSON API response.</p>
 
@@ -21,8 +21,13 @@
     <section>
       <h2>A demo...</h2>
       <p>...is found right here. The documentation is also a live example of
-      fj-vue, all the docs are made solely out of Vue and fj-vue, there is also
+      fl-vue, all the docs are made solely out of Vue and fl-vue, there is also
       a demo of every component at the top of the page.</p>
+    </section>
+
+    <section>
+      <h2>It's licensed...</h2>
+      <p>...under MIT, have fun.</p>
     </section>
 
   </div>

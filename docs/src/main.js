@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import FlVue from 'fl-vue'
-import { FlLink } from 'fl-vue'
+import { FlLink, FlCode } from 'fl-vue'
 
 import App from './App.vue'
 import router from '@/router'
@@ -28,6 +28,7 @@ Vue.use(FlVue, {
 })
 
 Vue.component('fl-link', FlLink)
+Vue.component('fl-code', FlCode)
 
 new Vue({
   router,
