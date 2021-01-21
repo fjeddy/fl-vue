@@ -132,7 +132,6 @@ export default {
 
       return h(
         'li',
-        {},
         [ element ]
       )
     }

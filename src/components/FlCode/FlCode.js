@@ -41,11 +41,5 @@ export default {
         })
       ]
     )
-  },
-  
-  computed: {
-    getContent() {
-      return this.source
-    }
   }
 }
