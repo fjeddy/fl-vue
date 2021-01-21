@@ -38,15 +38,15 @@ export default {
     FlLink
   },
 
-  render: function(createElement) {
+  render: function(h) {
     const elements = []
 
-    if (this.type === 'button') elements.push(this.createButton(createElement))
-    else elements.push(this.createLink(createElement))
+    if (this.type === 'button') elements.push(this.createButton(h))
+    else elements.push(this.createLink(h))
 
-    elements.push(this.createDropdown(createElement))
+    elements.push(this.createDropdown(h))
 
-    return createElement(
+    return h(
       this.container,
       {
         class: {
@@ -60,9 +60,9 @@ export default {
   },
 
   methods: {
-    createLink(createElement) {
+    createLink(h) {
       let self = this
-      return createElement(
+      return h(
         'a',
         {
           attrs: {
@@ -84,21 +84,21 @@ export default {
       )
     },
 
-    createButton(createElement) {
+    createButton(h) {
 
     },
 
-    createDropdown(createElement) {
+    createDropdown(h) {
       const elements = []
 
       if (this.items) {
         for (const item of this.items) {
-          const element = this.createDropdownLink(createElement, item)
+          const element = this.createDropdownLink(h, item)
           if (element) elements.push(element)
         }
       }
 
-      return createElement(
+      return h(
         'ul',
         {
           class: {
@@ -110,9 +110,9 @@ export default {
       )
     },
 
-    createDropdownLink(createElement, link) {
+    createDropdownLink(h, link) {
       let self = this
-      let element = createElement(
+      let element = h(
         'fl-link',
         {
           class: {
@@ -130,7 +130,7 @@ export default {
         }
       )
 
-      return createElement(
+      return h(
         'li',
         {},
         [ element ]

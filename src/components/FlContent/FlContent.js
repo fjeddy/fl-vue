@@ -7,19 +7,19 @@ export default {
     }
   },
 
-  render: function(createElement) {
-    let row = createElement(
+  render: function(h) {
+    let row = h(
       'div',
       {
         class: 'row h-100'
       },
       [
-        this.createSidebar(createElement),
-        this.createContent(createElement)
+        this.createSidebar(h),
+        this.createContent(h)
       ]
     )
 
-    let container = createElement(
+    let container = h(
       'div',
       { class: 'container flex-fill' },
       [
@@ -27,11 +27,11 @@ export default {
       ]
     )
 
-    return createElement(
+    return h(
       'div',
       { class: 'fl-content-wrapper d-flex flex-column' },
       [
-        this.createHeader(createElement),
+        this.createHeader(h),
         container
       ]
     )
@@ -129,35 +129,35 @@ export default {
   },
 
   methods: {
-    createHeader(createElement) {
+    createHeader(h) {
       if (!this.hasHeader) return
-      return createElement(
+      return h(
         'div',
         {
           class: this.getHeaderClasses
         },
-        [ createElement('router-view', { props: { name: 'header' } } ) ]
+        [ h('router-view', { props: { name: 'header' } } ) ]
       )
     },
 
-    createSidebar(createElement) {
+    createSidebar(h) {
       if (!this.hasSidebar) return
-      return createElement(
+      return h(
         'div',
         {
           class: this.getSidebarClasses
         },
-        [ createElement('router-view', { props: { name: 'sidebar' } } ) ]
+        [ h('router-view', { props: { name: 'sidebar' } } ) ]
       )
     },
 
-    createContent(createElement) {
-      return createElement(
+    createContent(h) {
+      return h(
         'div',
         {
           class: this.getContentClasses
         },
-        [ createElement('router-view') ]
+        [ h('router-view') ]
       )
     }
   }

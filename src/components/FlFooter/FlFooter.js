@@ -1,8 +1,8 @@
 export default {
   name: 'FlFooter',
 
-  render: function(createElement) {
-    return createElement(
+  render: function(h) {
+    return h(
       'div',
       {
         class: this.getClasses
@@ -16,7 +16,7 @@ export default {
       const classes = {
         'fl-footer': true
       }
-      
+
       if (this.$fj.options.footer.class) {
         const c = this.$fj.options.footer.class.split(' ')
         for (const cc of c) {

@@ -17,10 +17,10 @@ export default {
     }
   },
 
-  render: function(createElement) {
-    if (this.blank) return this.createRemoteLink(createElement)
-    if (this.$router) return this.createRouterLink(createElement)
-    return this.createLink(createElement)
+  render: function(h) {
+    if (this.blank) return this.createRemoteLink(h)
+    if (this.$router) return this.createRouterLink(h)
+    return this.createLink(h)
   },
 
   computed: {
@@ -32,8 +32,8 @@ export default {
   },
 
   methods: {
-    createLink(createElement) {
-      return createElement(
+    createLink(h) {
+      return h(
         'a',
         {
           attrs: {
@@ -47,8 +47,8 @@ export default {
       )
     },
 
-    createRouterLink(createElement) {
-      return createElement(
+    createRouterLink(h) {
+      return h(
         'router-link',
         {
           attrs: {
@@ -64,8 +64,8 @@ export default {
       )
     },
 
-    createRemoteLink(createElement) {
-      return createElement(
+    createRemoteLink(h) {
+      return h(
         'a',
         {
           attrs: {

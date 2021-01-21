@@ -13,12 +13,12 @@ export default {
     FlDropdown
   },
 
-  render: function(createElement) {
+  render: function(h) {
     return this.ce(
-      createElement,
+      h,
       'nav',
       this.getClasses,
-      [ this.createContainer(createElement) ]
+      [ this.createContainer(h) ]
     )
   },
 
@@ -53,7 +53,7 @@ export default {
       )
     },
 
-    createContainer(createElement) {
+    createContainer(h) {
       const elements = []
 
       if (this.menu) {
@@ -64,14 +64,14 @@ export default {
 
         for (const nav of menu) {
           let element
-          if (Array.isArray(nav)) element = this.createNavbarNav(createElement, { items: nav })
-          else element = this.createNavbarNav(createElement, nav)
+          if (Array.isArray(nav)) element = this.createNavbarNav(h, { items: nav })
+          else element = this.createNavbarNav(h, nav)
           if (element) elements.push(element)
         }
       }
 
       return this.ce(
-        createElement,
+        h,
         'div',
         'container',
         [
@@ -81,7 +81,7 @@ export default {
       )
     },
 
-    createNavbarNav(createElement, nav) {
+    createNavbarNav(h, nav) {
       if (nav.visible === false) return
 
       const elements = []
@@ -91,17 +91,17 @@ export default {
 
           if (item.dropdown) {
             if (!Array.isArray(item.dropdown)) throw new Error('Dropdown list is not an array.')
-            const element = this.createNavDropdown(createElement, item)
+            const element = this.createNavDropdown(h, item)
             if (element) elements.push(element)
           } else {
-            const element = this.createNavItem(createElement, item)
+            const element = this.createNavItem(h, item)
             if (element) elements.push(element)
           }
 
         }
       }
 
-      return createElement(
+      return h(
         'ul',
         {
           class: {
@@ -113,19 +113,19 @@ export default {
       )
     },
 
-    createNavItem(createElement, item) {
+    createNavItem(h, item) {
       if (item.visible === false) return
 
       return this.ce(
-        createElement,
+        h,
         'li',
         'nav-item',
-        [ this.createNavLink(createElement, item) ]
+        [ this.createNavLink(h, item) ]
       )
     },
 
-    createNavLink(createElement, item) {
-      return createElement(
+    createNavLink(h, item) {
+      return h(
         'fl-link',
         {
           class: 'nav-link',
@@ -137,10 +137,10 @@ export default {
       )
     },
 
-    createNavDropdown(createElement, item) {
+    createNavDropdown(h, item) {
       if (item.visible === false) return
 
-      return createElement(
+      return h(
         'fl-dropdown',
         {
           props: {
