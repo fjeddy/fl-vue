@@ -3,7 +3,9 @@ import 'prism-es6/themes/prism-tomorrow.css'
 
 export default {
   name: 'FlCode',
+
   functional: true,
+
   props: {
     code: {
       type: String
@@ -13,6 +15,7 @@ export default {
       default: 'markup'
     }
   },
+
   render: function(h, ctx) {
     const code =
       ctx.props.code ||
@@ -39,6 +42,7 @@ export default {
       ]
     )
   },
+  
   computed: {
     getContent() {
       return this.source
