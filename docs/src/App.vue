@@ -94,6 +94,10 @@ export default {
 
 <style lang="scss">
 @import "~fl-vue/src/scss/variables.scss";
+
+$font-size-base:            1.1rem;
+$line-height-base:          1.6;
+
 @import "~fl-vue/src/scss/fj-vue.scss";
 
 a {

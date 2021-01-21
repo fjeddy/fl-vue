@@ -8,6 +8,7 @@
     <ul class="list-unstyled">
       <li><fl-link title="Getting started" to="/getting-started" /></li>
       <li><fl-link title="SASS variables" to="/sass-variables" /></li>
+      <li><fl-link title="Global options" to="/global-options" /></li>
     </ul>
 
     <ul class="list-unstyled">
