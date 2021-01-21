@@ -38,3 +38,15 @@
 
   </div>
 </template>
+
+<script>
+import { FlAlert } from 'fl-vue'
+
+export default {
+  name: 'GettingStarted',
+
+  components: {
+    FlAlert
+  }
+}
+</script>

@@ -15,7 +15,7 @@ module.exports = [
     path: '/getting-started',
     name: 'GettingStarted',
     components: {
-      default: () => import(/* webpackChunkName: "page-index" */ '@/views/pages/GettingStarted.vue'),
+      default: () => import(/* webpackChunkName: "page-gettingStarted" */ '@/views/pages/GettingStarted.vue'),
       sidebar: () => import(/* webpackChunkName: "sidebar-navigation" */ '@/views/sidebars/Navigation.vue')
     },
     meta: {

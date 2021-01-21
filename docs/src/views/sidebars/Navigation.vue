@@ -26,6 +26,8 @@
       <li><fl-link title="fl-code" to="/components/code" /></li>
       <li><fl-link title="fl-link" to="/components/link" /></li>
       <li><fl-link title="fl-dropdown" to="/components/dropdown" /></li>
+      <li><fl-link title="fl-alert" to="/components/alert" /></li>
+      <li><fl-link title="fl-affix" to="/components/affix" /></li>
     </ul>
 
   </div>

@@ -7,6 +7,7 @@ import FlContent from './components/FlContent'
 import FlFooter from './components/FlFooter'
 
 import FlAffix from './components/FlAffix'
+import FlAlert from './components/FlAlert'
 import FlDropdown from './components/FlDropdown'
 import FlLink from './components/FlLink'
 import FlCode from './components/FlCode'
@@ -57,6 +58,7 @@ export {
   FlFooter,
 
   FlAffix,
+  FlAlert,
   FlDropdown,
   FlLink,
   FlCode

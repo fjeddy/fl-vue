@@ -24,9 +24,9 @@
       it's therefor required by this framework. Meta tags in the routes are used
       to determine the layout and content displayed.</p>
 
-      <p>Vue-router is not included, in any way, by fl-vue. But it does expect
+      <fl-alert>Vue-router is not included, in any way, by fl-vue. But it does expect
         vue-router to be registered and used in your app, and you therefor need
-        to include it on your own.</p>
+        to include it on your own.</fl-alert>
 
       <ul>
         <li>
@@ -80,3 +80,15 @@
 
   </div>
 </template>
+
+<script>
+import { FlAlert } from 'fl-vue'
+
+export default {
+  name: 'Home',
+
+  components: {
+    FlAlert
+  }
+}
+</script>

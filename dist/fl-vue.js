@@ -908,6 +908,24 @@ var FlFooter = {
   }
 };
 
+var FlAlert = {
+  name: 'FlAlert',
+  props: {
+    type: {
+      type: String,
+      default: 'info'
+    }
+  },
+  render: function (h) {
+    return h('div', {
+      class: {
+        'alert': true,
+        ["alert-".concat(this.type)]: true
+      }
+    }, this.$slots.default);
+  }
+};
+
 var FlCode = {
   name: 'FlCode',
   functional: true,
@@ -976,6 +994,7 @@ var index = {
 };
 
 exports.FlAffix = __vue_component__;
+exports.FlAlert = FlAlert;
 exports.FlAxios = axios_1;
 exports.FlCode = FlCode;
 exports.FlContent = FlContent;
