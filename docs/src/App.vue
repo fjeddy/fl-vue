@@ -95,4 +95,8 @@ export default {
 <style lang="scss">
 @import "~fl-vue/src/scss/variables.scss";
 @import "~fl-vue/src/scss/fj-vue.scss";
+
+a {
+  text-decoration: none;
+}
 </style>
