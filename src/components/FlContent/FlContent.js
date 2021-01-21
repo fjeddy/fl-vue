@@ -1,10 +1,10 @@
+import FlAffix from '../FlAffix'
+
 export default {
   name: 'FlContent',
 
-  data: function() {
-    return {
-
-    }
+  components: {
+    FlAffix
   },
 
   render: function(h) {
@@ -35,10 +35,6 @@ export default {
         container
       ]
     )
-  },
-
-  mounted() {
-
   },
 
   computed: {
@@ -147,7 +143,21 @@ export default {
         {
           class: this.getSidebarClasses
         },
-        [ h('router-view', { props: { name: 'sidebar' } } ) ]
+        [
+          h(
+            'fl-affix',
+            {
+              props: {
+                relativeElementSelector: '.fl-content',
+                offset: { top: 0, bottom: 0 }
+              },
+              attrs: {
+                style: 'width: 300px;'
+              }
+            },
+            [ h('router-view', { props: { name: 'sidebar' } } ) ]
+          )
+        ]
       )
     },
 

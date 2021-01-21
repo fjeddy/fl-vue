@@ -23,7 +23,7 @@
     "build": "npm run build:cjs && npm run build:umd && npm run build:css",
     "build:cjs": "bili --format cjs --moduleName fl-vue --fileName fl-vue.js",
     "build:umd": "bili --format umd --format umd-min --moduleName fl-vue --fileName fl-vue[min].[format].js",
-    "build:css": "node-sass --importer=node_modules/node-sass-tilde-importer src/scss/export.scss dist/fj-vue.css"
+    "build:css": "node-sass --importer=node_modules/node-sass-tilde-importer src/scss/export.scss dist/fl-vue.css"
   },
   "files": [
     "dist/",

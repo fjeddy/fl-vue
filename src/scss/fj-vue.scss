@@ -8,3 +8,19 @@ body {
 section {
   margin: 50px 0;
 }
+
+/**
+*** FlAffix
+**/
+
+.fl-affix {
+  position: relative;
+}
+
+.affix {
+  position: fixed;
+}
+
+.affix-bottom {
+  position: relative;
+}

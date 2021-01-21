@@ -30,6 +30,10 @@
       <p>Initalizing the framework set's the settings. But what actuall gets
       things running is including the core components in your <code>App.vue</code>
       file.</p>
+
+      <fl-code language="js">{`
+        Hello
+      `}</fl-code>
     </section>
 
   </div>
